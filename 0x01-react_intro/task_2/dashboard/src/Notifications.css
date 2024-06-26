@@ -5,10 +5,6 @@
     font-size: 3vmin;
 }
 
-.Notifications ul {
-    color: red;
-}
-
 .Notifications li[data-priority="default"] {
     color: blue;
 }

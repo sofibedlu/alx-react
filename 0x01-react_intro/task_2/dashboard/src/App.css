@@ -32,7 +32,21 @@ html, body, #root {
 
 hr {
   height: 4px;
-  background-color: red;
+  background-color: #ff0000;
   width: 100%;
   border: none;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.form label, .form input {
+  padding: 5px;
+}
+
+.form button {
+  margin-left: 10px;
+  padding: 5px;
 }

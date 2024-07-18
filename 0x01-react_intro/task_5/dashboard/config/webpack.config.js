@@ -1,57 +1,56 @@
-const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
-  entry: {
-    main: './src/index.js'
-  },
+  entry: "./src/index.js",
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, './dist'),
   },
-  devtool: 'inline-source-map',
-  devServer: {
-    static: '../dist',
-    hot: true,
-    port: 3000
-  },
-  mode: 'development',
+  mode: "development",
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        // type: 'asset/resource',
         use: [
-             {
-                loader: 'image-webpack-loader',
-                options: {
-                    bypassOnDebug: true,
-                    disable: true,
-                }
-              }
-        ]
+          "file-loader",
+          {
+            loader: "image-webpack-loader",
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
+            },
+          },
+        ],
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
-      }
+        use: ["babel-loader"],
+      },
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [".*", ".js", ".jsx"],
   },
+  devServer: {
+    static: "./dist",
+    compress: true,
+    open: true,
+    hot: true,
+    port: 8564,
+  },
+  devtool: "inline-source-map",
   plugins: [
     new HtmlWebpackPlugin({
-      name: "index.html"
+      name: "index.html",
+      inject: false,
+      template: "./dist/index.html",
     }),
   ],
 };

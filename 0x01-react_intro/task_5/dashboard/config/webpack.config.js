@@ -2,10 +2,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: path.join(__dirname, "../src/index.js"),
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, './dist'),
+    path: path.join(__dirname, '../dist'),
   },
   mode: "development",
   module: {
@@ -22,8 +22,8 @@ module.exports = {
           {
             loader: "image-webpack-loader",
             options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true, // webpack@2.x and newer
+              bypassOnDebug: true,
+              disable: true, 
             },
           },
         ],
@@ -39,7 +39,7 @@ module.exports = {
     extensions: [".*", ".js", ".jsx"],
   },
   devServer: {
-    static: "./dist",
+    static: path.join(__dirname, '../dist'),
     compress: true,
     open: true,
     hot: true,
@@ -50,7 +50,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       name: "index.html",
       inject: false,
-      template: "./dist/index.html",
+      template: path.join(__dirname, "../dist/index.html"), // Update this path
     }),
   ],
 };

@@ -3,18 +3,17 @@ import ReactDOM from 'react-dom';
 import App from './App/App';
 import Notifications from './Notifications/Notifications';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // New root for Notifications component
-const notificationsRoot = ReactDOM.createRoot(document.getElementById('root-notifications'));
-notificationsRoot.render(
+ReactDOM.render(
   <React.StrictMode>
     <Notifications />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root-notifications')
 );

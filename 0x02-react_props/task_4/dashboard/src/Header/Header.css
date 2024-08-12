@@ -1,0 +1,7 @@
+.App-header {
+    color: red;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: calc(100% - 300px);
+}

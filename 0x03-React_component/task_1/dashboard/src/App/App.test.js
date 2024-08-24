@@ -65,6 +65,6 @@ describe('App Component lifecycles', () => {
       document.dispatchEvent(event);
   
       expect(window.alert).toHaveBeenCalledWith('Logging you out');
-      
+      expect(logOutMock).toHaveBeenCalled();
     });
   });

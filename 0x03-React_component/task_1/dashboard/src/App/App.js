@@ -21,12 +21,6 @@ const listNotifications = [
 ];
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
-
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
   }

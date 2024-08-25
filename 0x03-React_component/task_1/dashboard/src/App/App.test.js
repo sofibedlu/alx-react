@@ -47,24 +47,18 @@ describe('App Component when isLoggedIn is true', () => {
 });
 
 describe('App Component lifecycles', () => {
-    let wrapper;
-    const logOutMock = jest.fn();
-  
-    beforeEach(() => {
-      wrapper = mount(<App logOut={logOutMock} />);
-      jest.spyOn(window, 'alert').mockImplementation(() => {});
-    });
-  
-    afterEach(() => {
-      jest.restoreAllMocks();
-      wrapper.unmount();
-    });
-  
-    it('should call logOut and alert with "Logging you out" when Control + H is pressed', () => {
-      const event = new KeyboardEvent('keydown', { ctrlKey: true, key: 'h' });
-      document.dispatchEvent(event);
-  
-      expect(window.alert).toHaveBeenCalledWith('Logging you out');
-      expect(logOutMock).toHaveBeenCalled();
+    
+    it('calls logOut and shows alert when ctrl+h is pressed', () => {
+        const logOutMock = jest.fn();
+        const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
+        const wrapper = mount(<App isLoggedIn={true} logOut={logOutMock} />);
+
+        const event = new KeyboardEvent('keydown', { ctrlKey: true, key: 'h' });
+        document.dispatchEvent(event);
+
+        expect(logOutMock).toHaveBeenCalled();
+        expect(alertMock).toHaveBeenCalledWith('Logging you out');
+
+        alertMock.mockRestore();
     });
   });

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BodySection from "./BodySection";
 import PropTypes from 'prop-types';
+import './BodySectionWithMarginBottom.css';
 
 class BodySectionWithMarginBottom extends Component {
     render() {

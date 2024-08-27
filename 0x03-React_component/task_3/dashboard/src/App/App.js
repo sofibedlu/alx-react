@@ -7,6 +7,8 @@ import Notifications from '../Notifications/Notifications';
 import PropTypes from 'prop-types';
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import BodySection from '../BodySection/BodySection';
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -49,7 +51,17 @@ class App extends Component {
           <Header />
           <Notifications listNotifications={listNotifications} />
           <hr />
-          {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+          {isLoggedIn ? (<BodySectionWithMarginBottom title="Course list">
+            <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
+            ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
+            )}
+          <BodySection title="News from the School">
+            <p>Here is some random text about the latest news from the school.</p>
+          </BodySection>
           <hr />
           <Footer />
         </div>

@@ -1,0 +1,22 @@
+.Notifications {
+    border: 1px dashed red;
+    padding: 5px;
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    font-size: 3vmin;
+}
+
+.Notifications li[data-notification-type="default"] {
+    color: blue;
+}
+.Notifications li[data-notification-type=urgent] {
+    color: red;
+}
+
+.menuItem {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-weight: 600;
+}

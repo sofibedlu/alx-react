@@ -13,6 +13,10 @@ class Notifications extends Component {
         this.markAsRead = this.markAsRead.bind(this);
     }
 
+    shouldComponentUpdate(nextProps) {
+        return nextProps.listNotifications.length > this.props.listNotifications.length;
+    }
+
     handleClick() {
         console.log('Close button has been clicked');
     }

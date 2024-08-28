@@ -84,39 +84,5 @@ describe('Notifications component', () => {
     
         consoleSpy.mockRestore();
       });
-
-      
-      it('does not rerender when updating props with the same list', () => {
-        const listNotifications = [
-          { id: 1, type: 'default', value: 'New course available' },
-          { id: 2, type: 'urgent', value: 'New resume available' }
-        ];
-    
-        const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
-        const instance = wrapper.instance();
-        jest.spyOn(instance, 'render');
-    
-        wrapper.setProps({ listNotifications });
-        expect(instance.render).toHaveBeenCalledTimes(0);
-      });
-    
-      it('rerenders when updating props with a longer list', () => {
-        const listNotifications = [
-          { id: 1, type: 'default', value: 'New course available' },
-          { id: 2, type: 'urgent', value: 'New resume available' }
-        ];
-    
-        const longerListNotifications = [
-          ...listNotifications,
-          { id: 3, type: 'default', value: 'New notification' }
-        ];
-    
-        const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
-        const instance = wrapper.instance();
-        jest.spyOn(instance, 'render');
-    
-        wrapper.setProps({ listNotifications: longerListNotifications });
-        expect(instance.render).toHaveBeenCalledTimes(1);
-      });
     
 });

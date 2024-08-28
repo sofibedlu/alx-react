@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NotificationItem = ({ id, type, value, html, markAsRead }) => {
-  return (
-    <li data-notification-type={type} onClick={() => markAsRead(id)}>
-      {html ? (
-        <div dangerouslySetInnerHTML={ html } />
-      ) : (
-        value
-      )}
-    </li>
-  );
-};
+class NotificationItem extends React.PureComponent {
+  render() {
+    const { id, type, value, html, markAsRead } = this.props;
+    return (
+      <li data-notification-type={type} onClick={() => markAsRead(id)}>
+        {html ? (
+          <div dangerouslySetInnerHTML={html} />
+        ) : (
+          value
+        )}
+      </li>
+    );
+  }
+}
 
 NotificationItem.propTypes = {
   id: PropTypes.number,

@@ -1,14 +1,6 @@
 import React from "react";
 import NotificationItem from "./NotificationItem";
 import { shallow } from "enzyme";
-import { StyleSheetTestUtils } from "aphrodite";
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
 
 describe("NotificationItem", () => {
     it("renders without crashing", () => {

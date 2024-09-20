@@ -77,6 +77,8 @@ class App extends Component {
     }
   }
 
+  //logIn and logOut functions are defined here as arrow functions so need to bind them in the constructor
+
   logIn = (email, password) => {
     this.setState({ user: { email, password, isLoggedIn: true } });
   }

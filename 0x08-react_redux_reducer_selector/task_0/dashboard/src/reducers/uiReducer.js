@@ -8,16 +8,6 @@ const initialState = {
 
 const uiReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOGIN:
-            return {
-                ...state,
-                isUserLoggedIn: true,
-            };
-        case LOGOUT:
-            return {
-                ...state,
-                isUserLoggedIn: false,
-            };
         case DISPLAY_NOTIFICATION_DRAWER:
             return {
                 ...state,
@@ -31,12 +21,17 @@ const uiReducer = (state = initialState, action) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                user: action.user,
+                isUserLoggedIn: true,
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                isUserLoggedIn: false,
             };
         case LOGIN_FAILURE:
             return {
                 ...state,
-                user: null,
+                isUserLoggedIn: false,
             };
         default:
             return state;

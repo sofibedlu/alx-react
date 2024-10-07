@@ -5,6 +5,10 @@ import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
 import NotificationItemShape from './NotificationItemShape';
 import { StyleSheet, css } from 'aphrodite';
+import { connect } from 'react-redux';
+import { fetchNotifications } from '../actions/notificationActionCreators';
+import { getNotifications } from '../selectors/notificationSelector';
+
 
 // Define keyframes for animations
 const opacityChange = {
@@ -72,6 +76,10 @@ class Notifications extends PureComponent {
         console.log('Close button has been clicked');
     }
 
+    componentDidMount() {
+        this.props.fetchNotifications();
+    }
+
     render() {
         const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer, markNotificationAsRead } = this.props;
 
@@ -121,7 +129,8 @@ Notifications.propTypes = {
     listNotifications: PropTypes.arrayOf(NotificationItemShape),
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
-    markNotificationAsRead: PropTypes.func
+    markNotificationAsRead: PropTypes.func,
+    fetchNotifications: PropTypes.func.isRequired,
 }
 
 Notifications.defaultProps = {
@@ -129,7 +138,20 @@ Notifications.defaultProps = {
     listNotifications: [],
     handleDisplayDrawer: () => {},
     handleHideDrawer: () => {},
-    markNotificationAsRead: () => {}
+    markNotificationAsRead: () => {},
+    fetchNotifications: () => {},
 }
 
-export default Notifications;
+Notifications.defaultProps = {
+    listNotifications: [],
+  };
+  
+const mapStateToProps = (state) => ({
+    listNotifications: getNotifications(state),
+});
+
+const mapDispatchToProps = {
+    fetchNotifications,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

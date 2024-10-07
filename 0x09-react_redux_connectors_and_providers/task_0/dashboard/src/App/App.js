@@ -11,7 +11,7 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
 import AppContext, { defaultUser, defaultLogout } from './AppContext';
-import { displayNotificationDrawer, hideNotificationDrawer } from '../actions/uiActionCreators';
+import { displayNotificationDrawer, hideNotificationDrawer, loginRequest, logout } from '../actions/uiActionCreators';
  
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -45,13 +45,6 @@ const styles = StyleSheet.create(
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      displayDrawer: false,
-      user: defaultUser,
-      logOut: this.logOut,
-      logIn: this.logIn,
-      listNotifications: listNotificationsData,
-    };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
@@ -90,10 +83,10 @@ class App extends Component {
   render() {
     const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer } = this.props;
     return (
-      <AppContext.Provider value={{ user: this.state.user, logOut: this.state.logOut }}>
+      <AppContext.Provider value={{ user: defaultUser, logOut: logout }}>
         <div className={css(styles.App)}>
           <Header />
-          <Notifications listNotifications={this.state.listNotifications} 
+          <Notifications listNotifications={listNotificationsData} 
             markNotificationAsRead={this.markNotificationAsRead}
             displayDrawer={displayDrawer}
             handleDisplayDrawer={displayNotificationDrawer}
@@ -105,7 +98,7 @@ class App extends Component {
           </BodySectionWithMarginBottom>
           ) : (
             <BodySectionWithMarginBottom title="Log in to continue">
-              <Login logIn={this.state.logIn}/>
+              <Login logIn={loginRequest}/>
             </BodySectionWithMarginBottom>
           )}
           <BodySection title="News from the School">
@@ -127,6 +120,8 @@ App.propTypes = {
   displayDrawer: PropTypes.bool,
   displayNotificationDrawer: PropTypes.func,
   hideNotificationDrawer: PropTypes.func,
+  loginRequest: PropTypes.func,
+  logout: PropTypes.func,
 };
 
 App.defaultProps = {
@@ -134,6 +129,8 @@ App.defaultProps = {
   displayDrawer: false,
   displayNotificationDrawer: () => {},
   hideNotificationDrawer: () => {},
+  loginRequest: () => {},
+  logout: () => {},
 };
 
 export const mapStateToProps = (state) => {
@@ -146,6 +143,8 @@ export const mapStateToProps = (state) => {
 export const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
+  loginRequest,
+  logout,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

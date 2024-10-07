@@ -64,16 +64,6 @@ class App extends Component {
     }
   }
 
-  //logIn and logOut functions are defined here as arrow functions so no need to bind them in the constructor
-
-  logIn = (email, password) => {
-    this.setState({ user: { email, password, isLoggedIn: true } });
-  }
-
-  logOut = () => {
-    this.setState({ user: defaultUser })
-  }
-
   markNotificationAsRead(id) {
     this.setState((prevState) => ({
       listNotifications: prevState.listNotifications.filter(notification => notification.id !== id)

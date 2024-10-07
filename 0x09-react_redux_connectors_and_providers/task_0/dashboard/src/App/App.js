@@ -11,6 +11,7 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
 import AppContext, { defaultUser, defaultLogout } from './AppContext';
+import { displayNotificationDrawer, hideNotificationDrawer } from '../actions/uiActionCreators';
  
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -97,7 +98,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, displayDrawer } = this.props;
+    const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer } = this.props;
     return (
       <AppContext.Provider value={{ user: this.state.user, logOut: this.state.logOut }}>
         <div className={css(styles.App)}>
@@ -105,8 +106,8 @@ class App extends Component {
           <Notifications listNotifications={this.state.listNotifications} 
             markNotificationAsRead={this.markNotificationAsRead}
             displayDrawer={displayDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}
+            handleDisplayDrawer={displayNotificationDrawer}
+            handleHideDrawer={hideNotificationDrawer}
             />
           <div><hr className={css(styles.hrStyle)}/></div>
           {isLoggedIn ? (<BodySectionWithMarginBottom title="Course list">
@@ -138,4 +139,9 @@ export const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export const mapDispatchToProps = {
+  displayNotificationDrawer,
+  hideNotificationDrawer,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

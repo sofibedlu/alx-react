@@ -19,12 +19,6 @@ const listCourses = [
   { id: 3, name: 'React', credit: 40 }
 ];
 
-const listNotificationsData = [
-  { id: 1, type: 'default', value: 'New course available' },
-  { id: 2, type: 'urgent', value: 'New resume available' },
-  { id: 3, type: 'urgent', html: { __html: getLatestNotification() } }
-];
-
 const styles = StyleSheet.create(
   {
     App: {
@@ -62,12 +56,6 @@ class App extends Component {
       alert('Logging you out');
       this.state.logOut();
     }
-  }
-
-  markNotificationAsRead(id) {
-    this.setState((prevState) => ({
-      listNotifications: prevState.listNotifications.filter(notification => notification.id !== id)
-    }));
   }
 
   render() {

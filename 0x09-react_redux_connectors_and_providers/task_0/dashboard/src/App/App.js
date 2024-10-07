@@ -97,18 +97,19 @@ class App extends Component {
   }
 
   render() {
+    const { isLoggedIn, displayDrawer } = this.props;
     return (
       <AppContext.Provider value={{ user: this.state.user, logOut: this.state.logOut }}>
         <div className={css(styles.App)}>
           <Header />
           <Notifications listNotifications={this.state.listNotifications} 
             markNotificationAsRead={this.markNotificationAsRead}
-            displayDrawer={this.state.displayDrawer}
+            displayDrawer={displayDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
             />
           <div><hr className={css(styles.hrStyle)}/></div>
-          {this.props.isLoggedIn ? (<BodySectionWithMarginBottom title="Course list">
+          {isLoggedIn ? (<BodySectionWithMarginBottom title="Course list">
             <CourseList listCourses={listCourses} />
           </BodySectionWithMarginBottom>
           ) : (
@@ -132,7 +133,8 @@ class App extends Component {
 
 export const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.get('isUserLoggedIn')
+    isLoggedIn: state.get('isUserLoggedIn'),
+    displayDrawer: state.get('isNotificationDrawerVisible'),
   }
 }
 
